@@ -1,22 +1,15 @@
 console.log('im alive');
 
-let dataURL = '../data.json';
-let req = new XMLHttpRequest();
-req.open('GET', dataURL); 
-req.responseType='json'; 
-req.send(); 
+const fetchJson = fetch('/data')
+    .then((response) => response.json()
+    .then(res => Load(res)));
 
-req.onload = () => {
-    const data = req.response;
-    console.log(data);
+const Load = (res) => {
 
-    
-
-    data.forEach(element => {
+    res.forEach(element => {
         const li = document.createElement('li');
         li.textContent = element;
-        
+
         document.getElementById('list').appendChild(li);
     });
-    
 }
